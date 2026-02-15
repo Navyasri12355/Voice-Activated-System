@@ -1,80 +1,80 @@
 # Voice-Activated System
 
-A hands-free computer control system that interprets voice commands to execute system actions, such as opening applications, searching the web, and checking the time. Built with Python, SpeechRecognition, and Spacy.
+A powerful hands-free computer control system built with Python. It allows users to control their Windows OS through voice commands, supporting both internet-reliant and fully offline modes.
 
-## Features
+## ✨ Features
 
--   **Voice Recognition**: Converts speech to text using Google Speech Recognition.
--   **Natural Language Processing**: Uses `spaCy` for intent recognition, with a robust keyword fallback.
--   **System Control**: Opens applications (Notepad, Calculator, Chrome, etc.).
--   **Web Search**: Automatically performs Google searches.
--   **Voice Feedback**: Responds to the user using Text-to-Speech (`pyttsx3`).
+- **🗣️ Advanced Speech Recognition**:
+  - **Online**: Uses Google Web Speech API for high accuracy.
+  - **Offline**: Uses `Vosk` for private, local transcription.
+- **🧠 Custom NLP Engine**:
+  - Powered by `Spacy` with a custom-trained `TextCategorizer` and `NER` (Named Entity Recognition).
+  - High robustness against noise and variations in speech.
+- **💻 Desktop Control**:
+  - **Applications**: Open and Close windows (e.g., "Open Chrome", "Close Notepad").
+  - **Browsing**: Native browser control for searching and direct navigation.
+- **🔊 System Mastery**:
+  - **Volume**: Increase, Decrease, Mute, and Unmute.
+  - **Media**: Play, Pause, Next, and Previous track controls.
+  - **State**: Lock PC, Sleep, Restart, and Shut Down (with safety delay).
 
-## Installation
+## 🚀 Getting Started
 
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/Navyasri12355/Voice-Activated-System.git
-    cd Voice-Activated-System
-    ```
+### Prerequisites
+- Windows OS
+- Python 3.8+
+- Active Microphone
 
-2.  **Create and activate a virtual environment**:
-    ```bash
-    python -m venv venv
-    # Windows
-    venv\Scripts\activate
-    # Mac/Linux
-    source venv/bin/activate
-    ```
+### Installation
+1. Clone the repository and navigate to the directory.
+2. Create a virtual environment:
+   ```bash
+   python -m venv venv
+   ```
+3. Install dependencies:
+   ```bash
+   venv\Scripts\pip install -r requirements.txt
+   ```
 
-3.  **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4.  **Install Spacy Model**:
-    ```bash
-    python -m spacy download en_core_web_sm
-    ```
-    *Note: If the download fails, you can try installing the wheel directly:*
-    ```bash
-    pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
-    ```
-
-## Usage
-
-Run the main application:
-
+### 🛠️ Configuration (Offline Only)
+To use the offline mode, you must first train the local Spacy model:
 ```bash
-python src/main.py
+venv\Scripts\python train_spacy.py
+```
+*This will generate a model in `models/custom_spacy`.*
+
+## 🎮 Usage
+
+### Run Online Mode
+```bash
+venv\Scripts\python src\main.py
 ```
 
-Wait for the "Listening..." prompt, then speak a command.
-
-### Example Commands
-
--   "Open Notepad"
--   "Open Calculator"
--   "Search for Python tutorials"
--   "What time is it?"
--   "Exit"
-
-## Project Structure
-
-```
-Voice-Activated-System/
-├── src/
-│   ├── main.py          # Entry point
-│   ├── listener.py      # Speech-to-Text
-│   ├── speaker.py       # Text-to-Speech
-│   ├── commander.py     # NLP & Intent Parsing
-│   └── executor.py      # Action Execution
-├── requirements.txt     # Python dependencies
-└── README.md            # Documentation
+### Run Offline Mode
+```bash
+venv\Scripts\python src\main_offline.py
 ```
 
-## Troubleshooting
+## 🗣️ Voice Commands
 
--   **"API unavailable"**: Check your internet connection (required for Google Speech Recognition).
--   **Microphone issues**: Ensure your default recording device is set correctly in OS settings.
--   **Spacy specific errors**: The system will fallback to simple keyword matching if Spacy fails to load, so basic commands will still work.
+| Category | Commands |
+| :--- | :--- |
+| **Apps** | "Open [App Name]", "Close [App Name]", "Terminate [App Name]" |
+| **Browsing** | "Go to [website.com]", "Browse [website]", "Search for [query]" |
+| **Volume** | "Volume up", "Decrease volume", "Mute sound", "Unmute" |
+| **Media** | "Play music", "Pause video", "Next track", "Previous song" |
+| **System** | "Lock my computer", "Shutdown the pc", "Restart computer", "Sleep" |
+| **Utility** | "What time is it?", "Exit application", "Goodbye" |
+
+## 📁 Project Structure
+- `src/`: Core source code.
+  - `main.py`: Online entry point.
+  - `main_offline.py`: Offline entry point.
+  - `executor.py`: OS-level action logic.
+  - `offline/`: Modules specific to the offline stack.
+- `train_spacy.py`: Training script for the custom NLP model.
+- `models/`: Location of the trained Spacy models (gitignored).
+- `requirements.txt`: Project dependencies.
+
+## ⚖️ License
+MIT License

@@ -1,2 +1,23 @@
-venv/
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Spacy / NLP Models
+models/
+model/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+desktop.ini
+
+# Project specific
+*.log
+model.zip
+vosk-model-*/
